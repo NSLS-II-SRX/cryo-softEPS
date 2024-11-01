@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2024-09-23 10:59:43 by akiss-->
+<display version="2.0.0">
+  <name>Cryo Alive</name>
+  <width>400</width>
+  <height>350</height>
+  <widget type="rectangle" version="2.0.0">
+    <name>Rectangle</name>
+    <x>45</x>
+    <y>310</y>
+    <width>309</width>
+    <height>2</height>
+    <line_width>2</line_width>
+    <line_color>
+      <color name="Black" red="0" green="0" blue="0">
+      </color>
+    </line_color>
+    <background_color>
+      <color name="Background" red="240" green="240" blue="240">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label</name>
+    <class>TITLE</class>
+    <text>Cryocool Alive Status</text>
+    <x use_class="true">0</x>
+    <y use_class="true">0</y>
+    <width>380</width>
+    <height>31</height>
+    <font use_class="true">
+      <font name="Header 1" family="Liberation Sans" style="BOLD" size="16.0">
+      </font>
+    </font>
+    <foreground_color use_class="true">
+      <color name="Text" red="0" green="0" blue="0">
+      </color>
+    </foreground_color>
+    <transparent use_class="true">true</transparent>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_1</name>
+    <text>Watch A</text>
+    <x>10</x>
+    <y>40</y>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update</name>
+    <pv_name>XF:05IDA-UT{Cryo:1}:WATCHA</pv_name>
+    <x>100</x>
+    <y>40</y>
+    <format>1</format>
+    <precision>1</precision>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_2</name>
+    <class>COMMENT</class>
+    <text>PV being monitored</text>
+    <x>240</x>
+    <y>40</y>
+    <width>140</width>
+    <font use_class="true">
+      <font name="Comment" family="Liberation Sans" style="ITALIC" size="14.0">
+      </font>
+    </font>
+    <foreground_color use_class="true">
+      <color name="Text" red="0" green="0" blue="0">
+      </color>
+    </foreground_color>
+    <transparent use_class="true">true</transparent>
+    <wrap_words use_class="true">true</wrap_words>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_4</name>
+    <text>Watch B</text>
+    <x>10</x>
+    <y>72</y>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_2</name>
+    <pv_name>XF:05IDA-UT{Cryo:1}:WATCHB</pv_name>
+    <x>100</x>
+    <y>72</y>
+    <format>1</format>
+    <precision>1</precision>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_5</name>
+    <text>Watch C</text>
+    <x>10</x>
+    <y>104</y>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_3</name>
+    <pv_name>XF:05IDA-UT{Cryo:1}:WATCHC</pv_name>
+    <x>100</x>
+    <y>104</y>
+    <format>1</format>
+    <precision>1</precision>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_6</name>
+    <text>Watch D</text>
+    <x>10</x>
+    <y>136</y>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_4</name>
+    <pv_name>XF:05IDA-UT{Cryo:1}:WATCHD</pv_name>
+    <x>100</x>
+    <y>136</y>
+    <format>1</format>
+    <precision>1</precision>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_7</name>
+    <text>Watch E</text>
+    <x>10</x>
+    <y>168</y>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_5</name>
+    <pv_name>XF:05IDA-UT{Cryo:1}:WATCHE</pv_name>
+    <x>100</x>
+    <y>168</y>
+    <format>1</format>
+    <precision>1</precision>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>LED</name>
+    <pv_name>XF:05IDA-UT{Cryo:1}:ALARMSTATUS</pv_name>
+    <x>30</x>
+    <y>200</y>
+    <off_color>
+      <color name="OK" red="0" green="255" blue="0">
+      </color>
+    </off_color>
+    <on_color>
+      <color name="MAJOR" red="255" green="0" blue="0">
+      </color>
+    </on_color>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_8</name>
+    <text>Cryocooler Status</text>
+    <x>100</x>
+    <y>200</y>
+    <width>200</width>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>LED_1</name>
+    <pv_name>XF:05IDA-UT{Cryo:1}:CLOSE_FE</pv_name>
+    <x>30</x>
+    <y>230</y>
+    <off_color>
+      <color name="Red OFF" red="100" green="0" blue="0">
+      </color>
+    </off_color>
+    <on_color>
+      <color name="Red ON" red="255" green="0" blue="0">
+      </color>
+    </on_color>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_9</name>
+    <text>Close FE Shutter Command</text>
+    <x>100</x>
+    <y>230</y>
+    <width>200</width>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_10</name>
+    <text>FE Shutter Status</text>
+    <x>100</x>
+    <y>260</y>
+    <width>200</width>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>LED_2</name>
+    <pv_name>XF:05ID-PPS{Sh:WB}Sts:Cls-Sts</pv_name>
+    <x>30</x>
+    <y>260</y>
+    <off_color>
+      <color name="OK" red="0" green="255" blue="0">
+      </color>
+    </off_color>
+    <on_color>
+      <color name="MAJOR" red="255" green="0" blue="0">
+      </color>
+    </on_color>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button</name>
+    <actions>
+      <action type="write_pv">
+        <description>Open shutter</description>
+        <pv_name>XF:05IDA-UT{Cryo:1}:TEST_SHUTTER</pv_name>
+        <value>0</value>
+      </action>
+    </actions>
+    <text>Sim Open shutter</text>
+    <x>410</x>
+    <y>260</y>
+    <width>130</width>
+    <height>20</height>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>button_resetCryo</name>
+    <actions>
+      <action type="write_pv">
+        <description>Sim Reset Cryo Alarm</description>
+        <pv_name>XF:05IDA-UT{Cryo:1}:ALARM-RESET-Cmd.PROC</pv_name>
+        <value>1</value>
+      </action>
+    </actions>
+    <text>Sim Reset Cryo</text>
+    <x>410</x>
+    <y>40</y>
+    <width>130</width>
+    <height>20</height>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>LED_3</name>
+    <pv_name>XF:05IDA-VA:1{Mir:1-GV:1}Pos-Sts</pv_name>
+    <x>266</x>
+    <y>300</y>
+    <off_color>
+      <color name="MAJOR" red="255" green="0" blue="0">
+      </color>
+    </off_color>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>LED_4</name>
+    <pv_name>XF:05IDA-VA:1{Slt:1-GV:1}Pos-Sts</pv_name>
+    <x>350</x>
+    <y>300</y>
+    <off_color>
+      <color name="MAJOR" red="255" green="0" blue="0">
+      </color>
+    </off_color>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>LED_5</name>
+    <pv_name>XF:05IDA-VA:1{Mono:HDCM-GV:1}Pos-Sts</pv_name>
+    <x>114</x>
+    <y>300</y>
+    <off_color>
+      <color name="MAJOR" red="255" green="0" blue="0">
+      </color>
+    </off_color>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>LED_6</name>
+    <pv_name>XF:05IDA-VA:1{BPM:1-GV:1}Pos-Sts</pv_name>
+    <x>31</x>
+    <y>300</y>
+    <off_color>
+      <color name="MAJOR" red="255" green="0" blue="0">
+      </color>
+    </off_color>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button_1</name>
+    <actions>
+      <action type="write_pv">
+        <description>Open Gate Valves</description>
+        <pv_name>XF:05IDA-UT{Cryo:1}:GV-RESET-Cmd.PROC</pv_name>
+        <value>1</value>
+      </action>
+    </actions>
+    <text>Sim Open Gate Valves</text>
+    <x>410</x>
+    <y>300</y>
+    <width>130</width>
+    <height>40</height>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_3</name>
+    <text>DS B</text>
+    <x>15</x>
+    <y>330</y>
+    <width>50</width>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_11</name>
+    <text>DS A</text>
+    <x>98</x>
+    <y>330</y>
+    <width>50</width>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_12</name>
+    <text>US A</text>
+    <x>250</x>
+    <y>330</y>
+    <width>50</width>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_13</name>
+    <text>US B</text>
+    <x>335</x>
+    <y>330</y>
+    <width>50</width>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_14</name>
+    <text>HDCM</text>
+    <x>165</x>
+    <y>299</y>
+    <width>70</width>
+    <height>25</height>
+    <transparent>false</transparent>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_width>2</border_width>
+  </widget>
+</display>

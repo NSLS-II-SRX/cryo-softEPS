@@ -16,10 +16,10 @@ DBD += cryo-softEPS.dbd
 cryo-softEPS_DBD += base.dbd
 
 # Include dbd files from all support applications:
-#cryo-softEPS_DBD += xxx.dbd
+cryo-softEPS_DBD += calc.dbd
 
 # Add all the support libraries needed by this IOC
-#cryo-softEPS_LIBS += xxx
+cryo-softEPS_LIBS += calc
 
 # cryo-softEPS_registerRecordDeviceDriver.cpp derives from cryo-softEPS.dbd
 cryo-softEPS_SRCS += cryo-softEPS_registerRecordDeviceDriver.cpp

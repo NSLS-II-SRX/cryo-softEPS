@@ -1,5 +1,6 @@
 /* cryo-softEPSMain.cpp */
-/* Author:  Marty Kraimer Date:    17MAR2000 */
+/* Author:  Andy Kiss  <akiss@bnl.gov> */
+/* Date:    Nov 1, 2024 */
 
 #include <stddef.h>
 #include <stdlib.h>

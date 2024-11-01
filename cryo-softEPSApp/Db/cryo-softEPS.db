@@ -1,0 +1,182 @@
+# Use ai during production
+# ao during testing
+record(ai, "$(PREFIX):WATCHA"){
+# record(ao, "$(PREFIX):WATCHA"){
+    field(DESC, "Fill level in the cryocooler")
+    field(INP, "$(WATCHPV) CP")
+    # field(VAL, 0)
+    field(PHAS, 4)
+}
+
+record(ai, "$(PREFIX):WATCHB"){
+    field(DESC, "Cryo fill 1 second ago")
+    field(VAL, 1)
+    field(INP, "$(PREFIX):WATCHA")
+    field(SCAN, "1 second")
+    field(PHAS, 3)
+}
+
+record(ai, "$(PREFIX):WATCHC"){
+    field(DESC, "Cryo fill 2 seconds ago")
+    field(VAL, 2)
+    field(INP, "$(PREFIX):WATCHB")
+    field(SCAN, "1 second")
+    field(PHAS, 2)
+}
+
+record(ai, "$(PREFIX):WATCHD"){
+    field(DESC, "Cryo fill 3 seconds ago")
+    field(VAL, 3)
+    field(INP, "$(PREFIX):WATCHC")
+    field(SCAN, "1 second")
+    field(PHAS, 1)
+}
+
+record(ai, "$(PREFIX):WATCHE"){
+    field(DESC, "Cryo fill 4 seconds ago")
+    field(VAL, 4)
+    field(INP, "$(PREFIX):WATCHD")
+    field(SCAN, "1 second")
+    field(PHAS, 0)
+}
+
+record(calc, "$(PREFIX):ALARMSTATUS"){
+    field(DESC, "History of cryocooler fill level")
+    field(SCAN, "1 second")
+    field(INPA, "$(PREFIX):WATCHA")
+    field(INPB, "$(PREFIX):WATCHB")
+    field(INPC, "$(PREFIX):WATCHC")
+    field(INPD, "$(PREFIX):WATCHD")
+    field(INPE, "$(PREFIX):WATCHE")
+    field(CALC, "(A=B) AND (A=C) AND (A=D) AND (A=E)")
+    field(HIGH, 1)
+    field(HSV, "MAJOR")
+}
+
+record(ao, "$(PREFIX):TEST_SHUTTER") {
+    field(DESC, "Test shutter PV")
+    field(VAL, 0)
+    field(SCAN, "1 second")
+}
+
+record(calcout, "$(PREFIX):ALARM-RESET-Cmd") {
+    field(INPA, "$(PREFIX):WATCHE")
+    field(CALC, A+1)
+    field(OUT, "$(PREFIX):WATCHA")
+}
+
+record(dfanout, "$(PREFIX):GV-RESET-Cmd") {
+    field(VAL, 0)
+    field(OUTA, "$(PREFIX):US_A")
+    field(OUTB, "$(PREFIX):US_B")
+    field(OUTC, "$(PREFIX):DS_A")
+    field(OUTD, "$(PREFIX):DS_B")
+
+}
+
+record(calcout, "$(PREFIX):CLOSE_FE") {
+    field(DESC, "Close FE shutter if cryo unresponsive")
+    field(SCAN, "1 second")
+    field(INPA, "$(PREFIX):ALARMSTATUS")  # 0 = OK, 1 = ALARM
+    field(INPB, "XF:05ID-PPS{Sh:WB}Sts:Cls-Sts")  # 0 = Open, 1 = Closed
+    # field(INPB, "XF:05IDA-PPS:1{PSh:2}Sts:Cls-Sts")  # 0 = Open, 1 = Closed
+    # field(INPB, "$(PREFIX):TEST_SHUTTER")  # 0 = Open, 1 = Closed
+    field(CALC, "(A=1) AND (B=0)")
+    # field(OUT, "$(PREFIX):TEST_SHUTTER")
+    field(OUT, "XF:05ID-PPS{Sh:WB}Cmd:Cls-Cmd")
+    # field(OUT, "XF:05IDA-PPS:1{PSh:2}Cmd:Cls-Cmd")
+    # field(OOPT, "Transition To Non-zero")
+    field(OOPT, "When Non-zero")
+}
+
+record(ao, "$(PREFIX):US_A") {
+    field(VAL, 0)
+    field(SCAN, "1 second")
+}
+
+record(ao, "$(PREFIX):US_B") {
+    field(VAL, 0)
+    field(SCAN, "1 second")
+}
+
+record(ao, "$(PREFIX):DS_A") {
+    field(VAL, 0)
+    field(SCAN, "1 second")
+}
+
+record(ao, "$(PREFIX):DS_B") {
+    field(VAL, 0)
+    field(SCAN, "1 second")
+}
+
+record(calcout, "$(PREFIX):CLOSE_GV:US_A") {
+    field(DESC, "Close gate valves if cryo unresponsive")
+    field(SCAN, ".5 second")
+    field(INPA, "$(PREFIX):ALARMSTATUS")  # 0 = OK, 1 = ALARM
+    field(INPB, "XF:05ID-PPS{Sh:WB}Sts:Cls-Sts")  # 0 = Open, 1 = Closed
+    # field(INPB, "XF:05IDA-PPS:1{PSh:2}Sts:Cls-Sts")  # 0 = Open, 1 = Closed
+    # field(INPB, "$(PREFIX):TEST_SHUTTER")  # 0 = Open, 1 = Closed
+    field(INPC, "XF:05IDA-VA:1{Mir:1-GV:1}Pos-Sts")  # 0 = Closed, 1 = Open 
+    field(CALC, "(A=1) AND (B=1) AND (C=1)")
+    # field(OUT, "XF:05ID-PPS{Sh:WB}Cmd:Cls-Cmd")
+    # field(OUT, "XF:05IDB-VA:1{BT:1-GV:1}Cmd:Cls-Cmd")
+    field(OUT, "XF:05IDA-VA:1{Mir:1-GV:1}Cmd:Cls-Cmd")
+    # field(OUT, "$(PREFIX):US_A")
+    field(ODLY, 3)  # Wait 3 seconds before closing GV
+    # field(OOPT, "Transition To Non-zero")
+    field(OOPT, "When Non-zero")
+}
+
+record(calcout, "$(PREFIX):CLOSE_GV:DS_A") {
+    field(DESC, "Close gate valves if cryo unresponsive")
+    field(SCAN, "1 second")
+    field(INPA, "$(PREFIX):ALARMSTATUS")  # 0 = OK, 1 = ALARM
+    # field(INPB, "XF:05ID-PPS{Sh:WB}Sts:Cls-Sts")  # 0 = Open, 1 = Closed
+    # field(INPB, "XF:05IDB-VA:1{BT:1-GV:1}Pos-Sts")  # 0 = Closed, 1 = Open
+    field(INPB, "XF:05IDA-VA:1{Mir:1-GV:1}Pos-Sts")  # 0 = Closed, 1 = Open 
+    # field(INPB, "$(PREFIX):US_A")  # 0 = Open, 1 = Closed
+    field(INPC, "XF:05IDA-VA:1{Mono:HDCM-GV:1}Pos-Sts")  # 0 = Closed, 1 = Open
+    field(CALC, "(A=1) AND (B=0) AND (C=1)")
+    # field(OUT, "XF:05ID-PPS{Sh:WB}Cmd:Cls-Cmd")
+    field(OUT, "XF:05IDA-VA:1{Mono:HDCM-GV:1}Cmd:Cls-Cmd")
+    # field(OUT, "$(PREFIX):DS_A")
+    field(ODLY, 3)  # Wait 3 seconds before closing GV
+    # field(OOPT, "Transition To Non-zero")
+    field(OOPT, "When Non-zero")
+}
+
+record(calcout, "$(PREFIX):CLOSE_GV:US_B") {
+    field(DESC, "Close gate valves if cryo unresponsive")
+    field(SCAN, "1 second")
+    field(INPA, "$(PREFIX):ALARMSTATUS")  # 0 = OK, 1 = ALARM
+    # field(INPB, "XF:05ID-PPS{Sh:WB}Sts:Cls-Sts")  # 0 = Open, 1 = Closed
+    # field(INPB, "$(PREFIX):DS_A")  # 0 = Open, 1 = Closed
+    field(INPB, "XF:05IDA-VA:1{Mono:HDCM-GV:1}Pos-Sts")  # 0 = Closed, 1 = Open
+    field(INPC, "XF:05IDA-VA:1{Slt:1-GV:1}Pos-Sts")  # 0 = Closed, 1 = Open
+    field(CALC, "(A=1) AND (B=0) AND (C=1)")
+    # field(OUT, "XF:05ID-PPS{Sh:WB}Cmd:Cls-Cmd")
+    field(OUT, "XF:05IDA-VA:1{Slt:1-GV:1}Cmd:Cls-Cmd")
+    # field(OUT, "$(PREFIX):US_B")
+    field(ODLY, 3)  # Wait 3 seconds before closing GV
+    # field(OOPT, "Transition To Non-zero")
+    field(OOPT, "When Non-zero")
+}
+
+record(calcout, "$(PREFIX):CLOSE_GV:DS_B") {
+    field(DESC, "Close gate valves if cryo unresponsive")
+    field(SCAN, "1 second")
+    field(INPA, "$(PREFIX):ALARMSTATUS")  # 0 = OK, 1 = ALARM
+    # field(INPB, "XF:05ID-PPS{Sh:WB}Sts:Cls-Sts")  # 0 = Open, 1 = Closed
+    field(INPB, "XF:05IDA-VA:1{Mono:HDCM-GV:1}Pos-Sts")  # 0 = Closed, 1 = Open
+    # field(INPB, "$(PREFIX):DS_A")  # 0 = Open, 1 = Closed
+    field(INPC, "XF:05IDA-VA:1{BPM:1-GV:1}Pos-Sts")  # 0 = Closed, 1 = Open
+    # XF:05IDA-VA:1{BPM:1-GV:1}Pos-Sts
+    field(CALC, "(A=1) AND (B=0) AND (C=1)")
+    # field(OUT, "XF:05ID-PPS{Sh:WB}Cmd:Cls-Cmd")
+    # field(OUT, "$(PREFIX):DS_B")
+    field(OUT, "XF:05IDA-VA:1{BPM:1-GV:1}Cmd:Cls-Cmd")
+    field(ODLY, 3)  # Wait 3 seconds before closing GV
+    # field(OOPT, "Transition To Non-zero")
+    field(OOPT, "When Non-zero")
+}
+
