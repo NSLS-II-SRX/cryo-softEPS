@@ -1,0 +1,5 @@
+NAME=cryo-softEPS
+USER=softioc-srx
+PORT=7010
+HOST=xf05idd-ioc1
+
