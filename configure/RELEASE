@@ -22,10 +22,6 @@
 # the CONFIG_SITE file.
 
 # Variables and paths to dependent modules:
-#MODULES = /path/to/modules
-#MYMODULE = $(MODULES)/my-module
-# SUPPORT = /home/akiss/epics/support
-# CALC = $(SUPPORT)/calc/R3-7-5
 SUPPORT = /usr/lib/epics
 CALC = $(SUPPORT)
 
@@ -33,7 +29,6 @@ CALC = $(SUPPORT)
 #SNCSEQ = $(MODULES)/seq-ver
 
 # EPICS_BASE should appear last so earlier modules can override stuff:
-# EPICS_BASE = /home/akiss/epics/base-7.0.8.1
 EPICS_BASE = /usr/lib/epics
 
 # Set RULES here if you want to use build rules from somewhere

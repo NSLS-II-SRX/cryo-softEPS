@@ -18,3 +18,5 @@ dbLoadRecords("db/cryo-softEPS.db","PREFIX=XF:05IDA-UT{Cryo:1}, WATCHPV=XF:05IDA
 cd "${TOP}/iocBoot/${IOC}"
 iocInit
 
+dbl > ${TOP}/records.dbl
+

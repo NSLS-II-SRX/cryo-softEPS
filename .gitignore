@@ -30,3 +30,6 @@ O.*/
 *.log
 .*.swp
 .DS_Store
+
+# List of PVs
+records.dbl
